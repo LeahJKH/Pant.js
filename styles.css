@@ -12,10 +12,22 @@ button {
   height: 60px;
   font-size: 20px;
 }
+header {
+  width: 100vmax;
+  height: 90px;
+  background-color: black;
+  color: white;
+  margin-top: -24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #People-checklist {
   width: 80%;
   height: fit-content;
   background-color: black;
+  color: white;
 }
 #Pant-randomizer {
   width: 80%;
