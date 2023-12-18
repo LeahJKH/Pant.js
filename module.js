@@ -1,7 +1,7 @@
 export let peopleArray = [
   "Stian",
   "Ghouthami",
-  "Trod",
+  "Tord",
   "Eskil",
   "Moe",
   "Inna",
@@ -21,10 +21,8 @@ export let peopleArray = [
   "Alexander S",
   "André K",
   "Adrian K",
-  "Leah",
   "Kristina",
   "Stein",
-  "Kai",
   "Sebastian",
   "Kristoffer",
   "Jesper",
@@ -39,4 +37,5 @@ export const Elements = {
   peopleRandom: document.querySelector("#Pant-randomizer"),
   firstPerson: document.querySelector("#first-Person"),
   secondPerson: document.querySelector("#second-Person"),
+  submitPeople: document.querySelector("#Submit-People")
 };
