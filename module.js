@@ -30,6 +30,9 @@ export let peopleArray = [
   "Sindre",
   "Ingmar",
   "Stein Inge",
+  "Trond Morten",
+  "Robert",
+  "Marius"
 ];
 
 export const Elements = {
