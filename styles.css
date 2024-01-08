@@ -2,36 +2,176 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(242, 87, 113);
+  background-color: rgb(193, 255, 235);
+  /* overflow-x: hidden; */
+  font-family: "ubuntu", sans-serif;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
-button {
-  border-radius: 20px;
-  border: none;
-  background-color: white;
-  width: 100px;
-  height: 60px;
-  font-size: 20px;
-}
+
 header {
-  width: 100vmax;
-  height: 90px;
-  background-color: black;
-  color: white;
-  margin-top: -24px;
-  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 5em;
+  background-color: rgb(48, 41, 90);
+  color: rgb(226, 241, 241);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
+
+h1 {
+  display: inline-block;
+  font-family: "Rubik Maps", sans-serif;
+  font-weight: lighter;
+  font-size: 3em;
+  animation: crumbleFold 4s ease-in-out infinite;
+}
+
 #People-checklist {
-  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  padding: 1em;
   height: fit-content;
-  background-color: black;
-  color: white;
+  background-color: rgb(9, 1, 21);
+  color: rgb(226, 241, 241);
+  font-size: large;
 }
+
+#People-checklist input[type="checkbox"] {
+  appearance: none;
+  height: 2em;
+  min-width: 2em;
+  border: none;
+  background-color: rgb(226, 241, 241);
+  border-radius: 35%;
+  cursor: pointer;
+}
+
+#People-checklist input[type="checkbox"]:checked {
+  background-color: rgb(167, 15, 15);
+  border: none;
+}
+
+#People-checklist input[type="checkbox"]:checked::before {
+  content: "\2713";
+  font-size: 1.8em;
+  font-weight: bold;
+  color: rgb(250, 250, 238);
+  position: relative;
+  top: -15%;
+  left: 15%;
+}
+
+#People-checklist label {
+  white-space: nowrap;
+  flex: 0 0 calc(33.33% - 1em);
+  box-sizing: border-box;
+  margin-left: 2px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nameBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 8em;
+  padding: 5px;
+  margin: 5px;
+  justify-content: start;
+  align-items: center;
+}
+
+button {
+  border-radius: 20px;
+  border: none;
+  color: rgb(250, 250, 238);
+  background-color: rgb(48, 41, 90);
+  width: 100px;
+  height: 60px;
+  font-size: 20px;
+  margin: 10px 0px;
+  transition: background-color 0.5s;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(9, 1, 21);
+}
+
+button:active {
+  background-color: rgb(167, 15, 15);
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
 #Pant-randomizer {
-  width: 80%;
+  width: 100%;
   height: fit-content;
-  background-color: black;
-  color: white;
+  background-color: rgb(9, 1, 21);
+  color: rgb(250, 250, 238);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+p,
+span {
+  margin: 0 10px;
+  padding: 10px;
+}
+
+span {
+  font-weight: bold;
+}
+
+/* Keyframes */
+
+@keyframes crumbleFold {
+  0%,
+  100% {
+    transform: scale(1) skewY(0deg);
+  }
+  20% {
+    transform: scale(0.8) skewY(-20deg) rotate(10deg);
+  }
+  40% {
+    transform: scale(0.5) skewY(0deg) rotate(-10deg);
+  }
+  60% {
+    transform: scale(0.7) skewY(20deg) rotate(5deg);
+  }
+  80% {
+    transform: scale(0.9) skewY(0deg) rotate(-5deg);
+  }
+}
+
+/* Media */
+
+@media only screen and (max-width: 360px) {
+  h1 {
+    width: 100vw;
+    position: sticky;
+  }
+
+  #People-checklist label {
+    padding: 10px;
+  }
+
+  .nameBox {
+    margin: 10px 2em;
+  }
+  /* Mobile, make the list take up the full screen, and have the submit at the bottom. When pressed, links to further down on page to see results. */
 }
