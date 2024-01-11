@@ -1,7 +1,6 @@
 import * as fs from "node:fs";
-import { filePath } from "./makePanteObject.mjs";
-let data = fs.readFileSync(filePath);
-let pantePersonArray = JSON.parse(data);
+const filePath = "./PantePersonDataObject.json";
+
 let count = 0;
 let winnerBracket = [];
 /**
@@ -30,13 +29,13 @@ const shuffleArray = (array) => {
 const displayWinners = (array) => {
   console.log(count);
   winnerBracket.forEach((winner) => {
-    winner.weightAdjust += pantePersonArray.length / 2 - 1;
+    winner.weightAdjust += (winnerBracket.length + array.length) / 2 - 1;
   });
   displayUsers(winnerBracket);
   array.forEach((user) => {
     user.weightAdjust -= 1;
   });
-  pantePersonArray = array.concat(winnerBracket);
+  let pantePersonArray = array.concat(winnerBracket);
   pantePersonArray.forEach((user) => {
     user.coinFlipChance = 50;
   });
@@ -67,7 +66,7 @@ const pickPanter = (array, number) => {
     }
   });
   if (winnerBracket.length < 2 || winnerBracket.length > 2) {
-    pantePersonArray = randomizedArray.concat(winnerBracket);
+    let pantePersonArray = randomizedArray.concat(winnerBracket);
     winnerBracket = [];
     pickPanter(pantePersonArray, randomNumber());
   } else {
@@ -95,5 +94,14 @@ const displayUsers = (array) => {
     console.log(user);
   });
 };
+const fetchData = () => {
+  let data = fs.readFileSync(filePath);
+  return JSON.parse(data);
+};
 
-pickPanter(pantePersonArray, randomNumber());
+const runPage = () => {
+  let pantePersonArray = fetchData();
+  console.log(pantePersonArray);
+  pickPanter(pantePersonArray, randomNumber());
+};
+runPage();

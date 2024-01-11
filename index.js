@@ -1,5 +1,13 @@
 import { peopleArray } from "./module.js";
-import { Elements } from "./module.js";
+
+/* Flyttet den over her så ikke terminalen skulle bli sur og lure wtf er elements hver gang jeg kjørte. */
+const Elements = {
+  peopleCheckList: document.querySelector("#People-checklist"),
+  peopleRandom: document.querySelector("#Pant-randomizer"),
+  firstPerson: document.querySelector("#first-Person"),
+  secondPerson: document.querySelector("#second-Person"),
+  submitPeople: document.querySelector("#Submit-People"),
+};
 
 document.addEventListener("DOMContentLoaded", (e) => {
   let OfficePeople = [];

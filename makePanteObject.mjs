@@ -15,5 +15,5 @@ class PantePerson {
 const pantePersonData = peopleArray.map((person) => {
   return new PantePerson(person, 50);
 });
-export const filePath = "./PantePersonDataObject.json";
+const filePath = "./PantePersonDataObject.json";
 fs.writeFileSync(filePath, JSON.stringify(pantePersonData), null, 2);
