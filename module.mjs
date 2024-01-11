@@ -28,7 +28,7 @@ export let peopleArray = [
   "Ingmar",
   "Stein Inge",
 ];
-
+/* 
 export const Elements = {
   peopleCheckList: document.querySelector("#People-checklist"),
   peopleRandom: document.querySelector("#Pant-randomizer"),
@@ -36,3 +36,4 @@ export const Elements = {
   secondPerson: document.querySelector("#second-Person"),
   submitPeople: document.querySelector("#Submit-People"),
 };
+ */
