@@ -1,4 +1,4 @@
-export let peopleArray = [
+let peopleArray = [
   "Stian",
   "Ghouthami",
   "Tord",
@@ -35,10 +35,13 @@ export let peopleArray = [
   "Marius"
 ];
 
-export const Elements = {
+ const Elements = {
   peopleCheckList: document.querySelector("#People-checklist"),
   peopleRandom: document.querySelector("#Pant-randomizer"),
   firstPerson: document.querySelector("#first-Person"),
   secondPerson: document.querySelector("#second-Person"),
   submitPeople: document.querySelector("#Submit-People")
-};
+}; 
+
+let filePath = "./users.json"
+fs.writeFileSync(filePath, JSON.stringify(pantere))
