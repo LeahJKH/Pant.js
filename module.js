@@ -2,7 +2,6 @@ export let peopleArray = [
   "Stian",
   "Ghouthami",
   "Tord",
-  "Eskil",
   "Inna",
   "Erik",
   "Katerina",
@@ -27,6 +26,10 @@ export let peopleArray = [
   "Eirik",
   "Ingmar",
   "Stein Inge",
+  "Joakim",
+  "Trond-Morten",
+  "Marius",
+  "Robert",
 ];
 
 export const Elements = {
