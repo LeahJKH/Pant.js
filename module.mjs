@@ -31,6 +31,8 @@ let peopleArray = [
   "Marius",
   "Robert",
 ];
+<<<<<<< HEAD:module.mjs
+=======
 
  const Elements = {
   peopleCheckList: document.querySelector("#People-checklist"),
@@ -42,3 +44,4 @@ let peopleArray = [
 
 let filePath = "./users.json"
 fs.writeFileSync(filePath, JSON.stringify(pantere))
+>>>>>>> main:module.js
