@@ -5,10 +5,12 @@ class PantePerson {
   name;
   weightAdjust;
   coinFlipChance;
+  win;
   constructor(name, weight) {
     this.name = name;
     this.weightAdjust = weight;
     this.coinFlipChance = weight;
+    this.win = 0;
   }
 }
 

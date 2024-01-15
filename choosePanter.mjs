@@ -1,5 +1,6 @@
 import * as fs from "node:fs";
-const filePath = "./PantePersonDataObject.json";
+const panterData = "./PantePersonDataObject.json";
+const overTidData = "./dataArrayObject.json";
 
 let count = 0;
 let winnerBracket = [];
@@ -26,20 +27,22 @@ const shuffleArray = (array) => {
  * Viser "vinnerene" og adjuster deres vinnersjanse til neste gang.
  * @param array arrayet med vinnerene
  */
-const displayWinners = (array) => {
+const displayWinners = (arrayOne, arrayTwo) => {
   console.log(count);
   winnerBracket.forEach((winner) => {
-    winner.weightAdjust += (winnerBracket.length + array.length) / 2 - 1;
+    if (winner.weightAdjust < 90)
+      winner.weightAdjust += (winnerBracket.length + arrayOne.length) / 2 - 1;
   });
   displayUsers(winnerBracket);
-  array.forEach((user) => {
-    user.weightAdjust -= 1;
+  arrayOne.forEach((user) => {
+    if (user.weightAdjust > winnerBracket.length + arrayOne.length)
+      user.weightAdjust -= 1;
   });
-  let pantePersonArray = array.concat(winnerBracket);
+  let pantePersonArray = arrayOne.concat(winnerBracket);
   pantePersonArray.forEach((user) => {
     user.coinFlipChance = 50;
   });
-  saveArray(pantePersonArray);
+  saveArray(pantePersonArray, arrayTwo);
 };
 /**
  * velger to random pantere fra arrayet, delvis basert på vanskelighets"vekt"
@@ -47,9 +50,10 @@ const displayWinners = (array) => {
  * Balanserer alle brukere på en "weight" mellom 60-70. Vil alltid velge blandt de med høyest tall. Virker som er rettferdig nok. Velger skjeldent samme person flere ganger.
  * @param array
  */
-const pickPanter = (array, number) => {
+const pickPanter = (arrayOne, arrayTwo, number) => {
   count++;
-  const randomizedArray = shuffleArray(array);
+  winnerBracket = [];
+  const randomizedArray = shuffleArray(arrayOne);
   randomizedArray.forEach((user) => {
     const weightAdjust = user.coinFlipChance / user.weightAdjust;
     const standardWeight = user.coinFlipChance * weightAdjust;
@@ -67,10 +71,9 @@ const pickPanter = (array, number) => {
   });
   if (winnerBracket.length < 2 || winnerBracket.length > 2) {
     let pantePersonArray = randomizedArray.concat(winnerBracket);
-    winnerBracket = [];
-    pickPanter(pantePersonArray, randomNumber());
+    pickPanter(pantePersonArray, arrayTwo, randomNumber());
   } else {
-    return displayWinners(randomizedArray);
+    return displayWinners(randomizedArray, arrayTwo);
   }
 };
 /**
@@ -85,23 +88,49 @@ const randomNumber = () => {
  * Lagrer arrayet med oppdaterte stats til localStorage
  * @param array
  */
-const saveArray = (array) => {
-  fs.writeFileSync(filePath, JSON.stringify(array), null, 2);
+const saveArray = (arrayOne, arrayTwo) => {
+  fs.writeFileSync(panterData, JSON.stringify(arrayOne), null, 2);
+  const finalCount = { count };
+  arrayOne.push(finalCount);
+  arrayTwo.push(arrayOne);
+  fs.writeFileSync(overTidData, JSON.stringify(arrayTwo), null, 2);
 };
 
 const displayUsers = (array) => {
   array.forEach((user) => {
-    console.log(user);
+    user.win++;
   });
 };
+
+const storeParse = (data1, data2) => {
+  let parsedData1 = JSON.parse(data1);
+  let parsedData2 = JSON.parse(data2);
+  const dataArray = [parsedData1, parsedData2];
+  return dataArray;
+};
+
 const fetchData = () => {
-  let data = fs.readFileSync(filePath);
-  return JSON.parse(data);
+  let panteData = fs.readFileSync(panterData);
+  let dataOverTime = fs.readFileSync(overTidData);
+  let dataArray = storeParse(panteData, dataOverTime);
+  return dataArray;
 };
 
 const runPage = () => {
-  let pantePersonArray = fetchData();
-  console.log(pantePersonArray);
-  pickPanter(pantePersonArray, randomNumber());
+  count = 0;
+  let [parsedData1, parsedData2] = fetchData();
+  console.log(parsedData1);
+  pickPanter(parsedData1, parsedData2, randomNumber());
 };
-runPage();
+
+const returnPromise = async (ms) => {
+  const returnedPromise = await new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+  return returnedPromise;
+};
+
+for (let i = 0; i < 100; i++) {
+  await returnPromise(100);
+  runPage();
+}
